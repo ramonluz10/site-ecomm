@@ -3,7 +3,12 @@
   "builds": [
     { "src": "package.json", "use": "@vercel/next" }
   ],
-  "routes": []
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://api.suaempresa.com"
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://api.suaempresa.com/api/:path*" }
+  ]
 }
 {
   "version": 3,
