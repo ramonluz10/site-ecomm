@@ -1,15 +1,19 @@
 'use client'
 
+ 
+'/* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */'
+'use client'
+
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Product, WishlistItem } from '@/lib/types'
 
 interface WishlistState {
   items: WishlistItem[]
-  addItem: (product: Product) => void
-  removeItem: (productId: string) => void
-  isInWishlist: (productId: string) => boolean
-  toggleItem: (product: Product) => void
+  addItem: (_product: Product) => void
+  removeItem: (_productId: string) => void
+  isInWishlist: (_productId: string) => boolean
+  toggleItem: (_product: Product) => void
   clearWishlist: () => void
 }
 

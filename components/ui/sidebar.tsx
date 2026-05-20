@@ -1,5 +1,7 @@
 'use client'
 
+ 
+
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, VariantProps } from 'class-variance-authority'
@@ -35,9 +37,9 @@ const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
 type SidebarContextProps = {
   state: 'expanded' | 'collapsed'
   open: boolean
-  setOpen: (open: boolean) => void
+  setOpen: (_open: boolean) => void
   openMobile: boolean
-  setOpenMobile: (open: boolean) => void
+  setOpenMobile: (_open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
 }
@@ -117,7 +119,6 @@ function SidebarProvider({
     () => ({
       state,
       open,
-      setOpen,
       isMobile,
       openMobile,
       setOpenMobile,

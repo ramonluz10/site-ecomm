@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SITE_CONFIG } from '@/lib/config'
 import './globals.css'
 
 const inter = Inter({ 
@@ -13,34 +14,36 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono'
 })
 
+const siteTitle = `${SITE_CONFIG.name} - Tecnologia Premium`
+
 export const metadata: Metadata = {
   title: {
-    default: 'PragmaticTech - Tecnologia Premium',
-    template: '%s | PragmaticTech'
+    default: siteTitle,
+    template: `%s | ${SITE_CONFIG.name}`
   },
-  description: 'Sua loja de tecnologia premium. Os melhores smartphones, notebooks e acessórios com garantia estendida e suporte especializado.',
+  description: SITE_CONFIG.description,
   keywords: ['tecnologia', 'smartphones', 'notebooks', 'acessórios', 'eletrônicos', 'apple', 'samsung', 'e-commerce'],
-  authors: [{ name: 'PragmaticTech' }],
-  creator: 'PragmaticTech',
+  authors: [{ name: SITE_CONFIG.name }],
+  creator: SITE_CONFIG.name,
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://pragmatictech.com',
-    siteName: 'PragmaticTech',
-    title: 'PragmaticTech - Tecnologia Premium',
-    description: 'Sua loja de tecnologia premium. Os melhores smartphones, notebooks e acessórios.',
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
+    title: siteTitle,
+    description: SITE_CONFIG.description,
+  },
+  robots: {
+    index: false,
+    follow: false,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PragmaticTech - Tecnologia Premium',
-    description: 'Sua loja de tecnologia premium.',
+    title: siteTitle,
+    description: SITE_CONFIG.description,
   },
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
+    icon: '/icon.svg',
     apple: '/apple-icon.png',
   },
 }

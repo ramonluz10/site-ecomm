@@ -1,2 +1,8 @@
+packages:
+  - '.'
+  - 'frontend'
+  - 'admin'
+  - 'backend-api'
 allowBuilds:
-  sharp: true
+  bcrypt: set this to true or false
+  sharp: set this to true or false

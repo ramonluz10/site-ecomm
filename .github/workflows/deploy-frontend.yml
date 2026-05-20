@@ -1,0 +1,38 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy-frontend:
+    name: Deploy Frontend App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build frontend app
+        run: pnpm --filter frontend build
+
+      - name: Deploy frontend to Vercel
+        uses: amondnet/vercel-action@v23
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
+          working-directory: frontend
+          prod: true
+          alias: pragmatctech.com

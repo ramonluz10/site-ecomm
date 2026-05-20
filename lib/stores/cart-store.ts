@@ -1,14 +1,17 @@
 'use client'
 
+'/* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */'
+'use client'
+
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Product, CartItem } from '@/lib/types'
 
 interface CartState {
   items: CartItem[]
-  addItem: (product: Product, quantity?: number) => void
-  removeItem: (productId: string) => void
-  updateQuantity: (productId: string, quantity: number) => void
+  addItem: (_product: Product, _quantity?: number) => void
+  removeItem: (_productId: string) => void
+  updateQuantity: (_productId: string, _quantity: number) => void
   clearCart: () => void
   getItemCount: () => number
   getTotal: () => number

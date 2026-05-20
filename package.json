@@ -2,6 +2,11 @@
   "name": "my-project",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "admin",
+    "backend-api"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -39,8 +44,6 @@
     "@radix-ui/react-tooltip": "1.2.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "@supabase/ssr": "^0.10.3",
-    "@supabase/supabase-js": "^2.105.4",
     "@vercel/analytics": "1.6.1",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
@@ -65,7 +68,8 @@
     "three": "^0.184.0",
     "vaul": "^1.1.2",
     "zod": "^3.24.1",
-    "zustand": "^5.0.13"
+    "zustand": "^5.0.13",
+    "@supabase/ssr": "^0.10.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { SITE_CONFIG } from '@/lib/config'
 
 const footerLinks = {
   loja: [
@@ -68,25 +69,28 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="relative w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
-                <span className="text-xl font-bold text-primary">P</span>
+                <span className="text-xl font-bold text-primary">{SITE_CONFIG.shortName.charAt(0)}</span>
               </div>
-              <span className="text-xl font-bold tracking-tight">
-                Pragmatic<span className="text-primary">Tech</span>
-              </span>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold tracking-tight leading-tight">
+                  {SITE_CONFIG.name.split(/(?=[A-Z])/)[0]}<span className="text-primary">{SITE_CONFIG.name.split(/(?=[A-Z])/)[1]}</span>
+                </span>
+                <span className="text-xs text-muted-foreground leading-none">Tecnologia Premium</span>
+              </div>
             </Link>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
-              Sua loja de tecnologia premium. Os melhores produtos com garantia e suporte especializado.
+              {SITE_CONFIG.description}
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3 text-sm">
-              <a href="tel:+5511999999999" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+              <a href={`tel:${SITE_CONFIG.phone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Phone className="w-4 h-4" />
-                (11) 99999-9999
+                {SITE_CONFIG.phone}
               </a>
-              <a href="mailto:contato@pragmatictech.com" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+              <a href={`mailto:${SITE_CONFIG.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" />
-                contato@pragmatictech.com
+                {SITE_CONFIG.email}
               </a>
               <div className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5" />
@@ -170,7 +174,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              {new Date().getFullYear()} PragmaticTech. Todos os direitos reservados.
+              {new Date().getFullYear()} {SITE_CONFIG.name}. Todos os direitos reservados.
             </p>
             
             {/* Social Links */}

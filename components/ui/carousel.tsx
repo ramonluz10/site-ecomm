@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 'use client'
+
+
 
 import * as React from 'react'
 import useEmblaCarousel, {
@@ -18,7 +21,7 @@ type CarouselProps = {
   opts?: CarouselOptions
   plugins?: CarouselPlugin
   orientation?: 'horizontal' | 'vertical'
-  setApi?: (api: CarouselApi) => void
+  setApi?: (_api: CarouselApi) => void
 }
 
 type CarouselContextProps = {

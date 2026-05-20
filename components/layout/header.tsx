@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useCartStore } from '@/lib/stores/cart-store'
 import { useWishlistStore } from '@/lib/stores/wishlist-store'
+import { SITE_CONFIG } from '@/lib/config'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -15,6 +16,12 @@ const navLinks = [
   { href: '/catalogo', label: 'Catálogo' },
   { href: '/categorias', label: 'Categorias' },
   { href: '/ofertas', label: 'Ofertas' },
+  { href: '/admin', label: 'Admin' },
+]
+
+const authLinks = [
+  { href: '/admin/login', label: 'Login Admin' },
+  { href: '/admin/estoque/login', label: 'Login Estoquista' },
 ]
 
 export function Header() {
@@ -45,14 +52,17 @@ export function Header() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between gap-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          {/* Logo & Brand Name */}
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="relative w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center glow-primary">
-              <span className="text-xl font-bold text-primary">P</span>
+              <span className="text-xl font-bold text-primary">{SITE_CONFIG.shortName.charAt(0)}</span>
             </div>
-            <span className="text-xl font-bold tracking-tight hidden sm:block">
-              Pragmatic<span className="text-primary">Tech</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="text-lg sm:text-xl font-bold tracking-tight leading-tight">
+                {SITE_CONFIG.name.split(/(?=[A-Z])/)[0]}<span className="text-primary">{SITE_CONFIG.name.split(/(?=[A-Z])/)[1]}</span>
+              </span>
+              <span className="text-xs text-muted-foreground leading-none hidden sm:block">Tecnologia Premium</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -164,6 +174,16 @@ export function Header() {
                 {/* Mobile Nav Links */}
                 <nav className="flex flex-col gap-2">
                   {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  {authLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
