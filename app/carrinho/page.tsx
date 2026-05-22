@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { useCartStore } from "@/lib/stores/cart-store"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
@@ -11,8 +12,54 @@ import { motion, AnimatePresence } from "framer-motion"
 
 export default function CarrinhoPage() {
   const { items, removeItem, updateQuantity, clearCart, getItemCount, getTotal } = useCartStore()
+  const [customerName, setCustomerName] = useState('Cliente')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null)
+  const [checkoutStatus, setCheckoutStatus] = useState<'success' | 'error' | null>(null)
+
   const itemCount = getItemCount()
   const total = getTotal()
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return
+
+    setIsSubmitting(true)
+    setCheckoutMessage(null)
+    setCheckoutStatus(null)
+
+    const payload = {
+      customer_name: customerName.trim() || 'Cliente',
+      items: items.map((item) => ({
+        product_id: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
+    }
+
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        setCheckoutStatus('error')
+        setCheckoutMessage(data?.error || 'Ocorreu um erro ao registrar a venda.')
+        return
+      }
+
+      clearCart()
+      setCheckoutStatus('success')
+      setCheckoutMessage('Compra finalizada com sucesso. Venda registrada para o painel administrativo.')
+    } catch (error) {
+      setCheckoutStatus('error')
+      setCheckoutMessage('Ocorreu um erro ao processar o pagamento. Tente novamente.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -179,11 +226,34 @@ export default function CarrinhoPage() {
                     </div>
                   </div>
 
+                  {checkoutMessage ? (
+                    <div
+                      className={`rounded-2xl border p-4 mb-4 text-sm ${checkoutStatus === 'success' ? 'border-green-200 bg-green-50 text-green-900' : 'border-destructive bg-destructive/5 text-destructive'}`}
+                    >
+                      {checkoutMessage}
+                    </div>
+                  ) : null}
+
+                  <div className="mb-4">
+                    <label htmlFor="customerName" className="block text-sm font-medium text-muted-foreground mb-2">
+                      Nome do cliente
+                    </label>
+                    <input
+                      id="customerName"
+                      type="text"
+                      value={customerName}
+                      onChange={(event) => setCustomerName(event.target.value)}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
                   <Button 
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6"
                     size="lg"
+                    onClick={handleCheckout}
+                    disabled={isSubmitting || items.length === 0}
                   >
-                    Finalizar Compra
+                    {isSubmitting ? 'Finalizando...' : 'Finalizar Compra'}
                   </Button>
 
                   <p className="text-xs text-center text-muted-foreground mt-4">

@@ -17,5 +17,5 @@ export function getAllowedRoles(page: AdminPagePermission) {
 
 export function isRoleAllowedForPage(role: string | undefined, page: AdminPagePermission) {
   if (!role) return false
-  return allowedRolesByPage[page].includes(role as ERPUserRole)
+  return (allowedRolesByPage[page] as readonly string[]).includes(role)
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm, UseFormProps, FieldValues, SubmitHandler } from 'react-hook-form'
 
 export interface UseAdminFormOptions<T extends FieldValues> extends UseFormProps<T> {
+  onSubmit?: SubmitHandler<T>
   onSuccess?: () => void
   onError?: (error: Error) => void
 }

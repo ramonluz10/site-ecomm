@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { destroySession } from '@/lib/server/erp-db'
 
 export async function GET(request: Request) {
-  const cookieJar = cookies()
+  const cookieJar = await cookies()
   const sessionId = cookieJar.get?.('erp_session')?.value
   if (sessionId) {
     await destroySession(sessionId)

@@ -12,7 +12,8 @@ export async function authorize(allowedRoles?: readonly string[]) {
     return user
   }
 
-  if (allowedRoles.includes(user.role || '')) {
+  const role = user.role
+  if (role && (allowedRoles as readonly string[]).includes(role)) {
     return user
   }
 
@@ -39,7 +40,8 @@ export async function authorizeApi(page: AdminPagePermission): Promise<ApiAuthor
     return { status: 'unauthorized', user: null }
   }
 
-  if (!allowedRolesByPage[page].includes(user.role || '')) {
+  const role = user.role
+  if (!role || !(allowedRolesByPage[page] as readonly string[]).includes(role)) {
     return { status: 'forbidden', user }
   }
 

@@ -244,3 +244,9 @@ export async function createSession(userId: string, ttlSeconds: number) {
   await writeERPData(data)
   return session
 }
+
+export async function destroySession(sessionId: string) {
+  const data = await readERPData()
+  data.sessions = data.sessions.filter((session) => session.id !== sessionId)
+  await writeERPData(data)
+}

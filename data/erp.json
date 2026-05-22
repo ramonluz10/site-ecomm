@@ -3,7 +3,7 @@
     {
       "id": "admin-user",
       "username": "admin",
-      "passwordHash": "f7310079b25e5d398ee9bc8120408e4e9142d55fa44c0634d7f192faa116f2a046feaf225d2e10fb7634166ef7bf15797da2a5e6cc2261db11a6a56156043b72",
+      "passwordHash": "1990b059db576be496318895104417f22fcad5cc1c7ac0669302699193ea1ea3c5e3aefc0ba04b34dcff1817b8467d1c00a9d88b89802cdce9ed20b17236dfb3",
       "role": "admin",
       "salt": "09e45c15912dc1930838cb3307c859b8"
     },
@@ -26,6 +26,12 @@
       "user_id": "admin-user",
       "created_at": "2026-05-20T20:54:13.649Z",
       "expires_at": "2026-05-21T04:54:13.649Z"
+    },
+    {
+      "id": "session-a5dbb86f-20a2-4d87-8fcd-10e59da0caba",
+      "user_id": "admin-user",
+      "created_at": "2026-05-22T03:44:38.900Z",
+      "expires_at": "2026-05-22T11:44:38.900Z"
     }
   ],
   "suppliers": [

@@ -1,7 +1,10 @@
 {
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/next" }
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
   ],
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.suaempresa.com"
@@ -9,16 +12,4 @@
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://api.suaempresa.com/api/:path*" }
   ]
-}
-{
-  "version": 3,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "framework": {
-      "name": "nextjs"
-  }
 }
